@@ -1,0 +1,18 @@
+<div class="autocomplete-input-component" #autocompleteInput>
+    <div class="form-group">
+        <input  type="text"
+                class="form-control autocomplete-input" 
+                placeholder="Find Programming Language"
+                [(ngModel)]="findQuery"     
+                (keydown)="onKeyboardNavigate($event)">
+    </div>
+            
+    <ul class="list-group snippet-box" [hidden]="!snippets.length" #list>
+        <ng-container *ngFor="let snippet of snippets | slice:0:5">
+            <li class="list-group-item snippet-box-item" 
+                [innerHtml]="highlight(snippet.name, snippet.highlighted)"
+                [ngClass]="{'keyboard-nav-hl': snippet === snippetCurrentItem}"></li>
+        </ng-container>
+    </ul>      
+</div>
+
